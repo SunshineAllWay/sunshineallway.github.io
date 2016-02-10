@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Shape Analysis | Zone of Sunshine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="In program analysis, a shape analysis is a static code analysis technique that discovers and verifies properties of linked, dynamically allocated data structures in (usually imperative) computer progr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shape Analysis">
+<meta property="og:url" content="http://zipperary.com/2016/02/09/my-new-post-3/index.html">
+<meta property="og:site_name" content="Zone of Sunshine">
+<meta property="og:description" content="In program analysis, a shape analysis is a static code analysis technique that discovers and verifies properties of linked, dynamically allocated data structures in (usually imperative) computer progr">
+<meta property="og:updated_time" content="2016-02-09T07:11:22.423Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shape Analysis">
+<meta name="twitter:description" content="In program analysis, a shape analysis is a static code analysis technique that discovers and verifies properties of linked, dynamically allocated data structures in (usually imperative) computer progr">
+  
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="overlay"></div>
+  <div id="header-outer" class="outer">
+    <div id="profile_img">
+      <img id="circle_img" src="holder.js/150x150" />
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Zone of Sunshine</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Walk steps step by step</a>
+        </h2>
+      
+    </div>
+    <div id="header-menu">
+      <nav id="main-nav">
+        <ul>
+        
+          <li><a href="/"><i class="fa fa-home icon-setting"></i></a></li>
+        
+          <li><a href="/archives"><i class="fa fa-archive icon-setting"></i></a></li>
+        
+          <li><a href="/profile"><i class="fa fa-user icon-setting"></i></a></li>
+        
+        
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-my-new-post-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/02/09/my-new-post-3/" class="article-date">
+  <time datetime="2016-02-09T05:59:14.000Z" itemprop="datePublished">2月 9 2016</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术博客/">技术博客</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Shape Analysis
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>In program analysis, a shape analysis is a static code analysis technique that discovers and verifies properties of linked, dynamically allocated data structures in (usually imperative) computer programs. It is typically used at compile time to find software bugs or to verify high-level correctness properties of programs.<br>Shape analysis has been applied to a variety of problems:<br><a id="more"></a><br>(1)Memory safety: finding memory leaks, dereferences of dangling pointers, and discovering cases where a block of memory is freed more than once.<br>(2)Finding array out-of-bounds errors.<br>(3)Checking type-state properties (for example, ensuring that a file is open() before it is read())<br>(4)Ensuring that a method to reverse a linked list does not introduce cycles into the list.<br>(5)Verifying that a sort method returns a result that is in sorted order.<br>Shape analysis is a form of pointer analysis, although it is more precise than typical pointer analysis. Pointer analysis attempt to determine the set of objects to which a pointer can point (called the points-to set of the pointer). Unfortunately, these analysis are necessarily approximate (since a perfectly precise static analysis could solve the halting problem). Shape analysis can determine smaller (more precise) points-to sets.</p>
+<pre><code>Item *items[10];
+for (int i = 0; i &lt; 10; ++i){
+items[i] = new Item(...); // line [1]
+}
+processItems(items); // line [2]
+for (int i = 0; i &lt; 10; ++i){
+delete items[i]; // line [3]
+}
+</code></pre><p>This program builds an array of objects, processes them in some arbitrary way, and then deletes them.<br>Assuming that the processItems function is free of errors, it is clear that the program is safe: it never references freed memory, and it deletes all the objects that it has constructed.<br>Most pointer analyses have difficulty analyzing this program precisely. In order to determine points-to sets, a pointer analysis must be able to name a program’s objects. In general, programs can allocate an unbounded number of objects; but in order to terminate, a pointer analysis can only use a finite set of names. A typical approximation is to give all the objects allocated on a given line of the program the same name. In the example above, all the objects constructed at line [1] would have the same name. Therefore, when the delete statement is analyzed for the first time, the analysis determines that one of the objects named [1] is being deleted. The second time the statement is analyzed (since it is in a loop) the analysis warns of a possible error: since it is unable to distinguish the objects in the array, it may be that the second delete is deleting the same object as the first delete. This warning is spurious, and the goal of shape analysis is to avoid such warnings.</p>
+<p>##Summarization and materialization##<br>Shape analysis overcomes the problems of pointer analysis by using a more flexible naming system for objects. Rather than giving an object the same name throughout a program, objects can change names depending on the program’s actions. Sometimes, several distinct objects with different names may be summarized, or merged, so that they have the same name. Then, when a summarized object is about to be used by the program, it can be materialized—that is, the summarized object is split into two objects with distinct names, one representing a single object and the other representing the remaining summarized objects. The basic heuristic of shape analysis is that objects that are being used by the program are represented using unique materialized objects, while objects not in use are summarized.<br>The array of objects in the example above is summarized in separate ways at lines [1], [2], and [3]. At line [1], the array has been only partly constructed. The array elements 0..i-1 contain constructed objects. The array element i is about to be constructed, and the following elements are uninitialized. A shape analysis can approximate this situation using a summary for the first set of elements, a materialized memory location for element i, and a summary for the remaining uninitialized locations, as follows:</p>
+<p>|| <em>0 … i-1</em> || <em>i</em> || <em>i+1 … 9</em> ||<br>|| pointer to constructed object (summary) || uninitialized || uninitialized (summary) ||</p>
+<p>After the loop terminates, at line [2], there is no need to keep anything materialized. The shape analysis determines at this point that all the array elements have been initialized:</p>
+<p>|| <em>0 … 9</em> ||<br>|| pointer to constructed object (summary) ||</p>
+<p>At line [3], however, the array element i is in use again. Therefore, the analysis splits the array into three segments as in line [1]. This time, though, the first segment before i has been deleted, and the remaining elements are still valid (assuming the delete statement hasn’t executed yet).</p>
+<p>|| <em>0 … i-1</em> || <em>i</em> || <em>i+1 … 9</em> ||<br>|| free(summary) || pointer to constructed object || pointer to constructed object (summary) ||</p>
+<p>Notice that in this case, the analysis recognizes that the pointer at index i has not been deleted yet. Therefore, it does not warn of a double deletion.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zipperary.com/2016/02/09/my-new-post-3/" data-id="cikg65xzv00008su498y5z0dm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序分析/">程序分析</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/01/29/my-new-post2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">岁末的零星感想</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Chengpeng Wang<br>
+      <a href="https://github.com/ken8203/hexo-theme-alberta" target="_blank">Alberta</a> by <a href="http://jaychung.tw" target="_blank">jaychung</a>. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Thank <a href="http://subtlepatterns.com/" target="_blank">Subtlepatterns</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//imsky.github.io/holder/holder.js"></script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
