@@ -6,18 +6,18 @@
   <title>我的第一篇博客——Hexo和Markdown的使用方法 | Zone of Sunshine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="我的个人主页采用了Hexo+Github进行搭建，Hexo依赖于Node.js，需要实现下载和安装。
-初次配置好Hexo后，之后写博客后常用的操作如下：1、hexo new “my new post” 建立新博客文档2、在PersonalPage\source_posts中打开文件进行编辑3、hexo server，访问localhost:4000预览效果。4、hexo deploy，同步到git">
+初次配置好Hexo后，之后写博客后常用的操作如下：1、hexo new “my new post” 建立新博客文档2、在PersonalPage\source_posts中打开文件进行编辑3、hexo server，访问localhost:4000预览效果。4、hexo clean5、hexo g">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我的第一篇博客——Hexo和Markdown的使用方法">
 <meta property="og:url" content="http://sunshineallway.github.io/2016/01/29/my-new-post/index.html">
 <meta property="og:site_name" content="Zone of Sunshine">
 <meta property="og:description" content="我的个人主页采用了Hexo+Github进行搭建，Hexo依赖于Node.js，需要实现下载和安装。
-初次配置好Hexo后，之后写博客后常用的操作如下：1、hexo new “my new post” 建立新博客文档2、在PersonalPage\source_posts中打开文件进行编辑3、hexo server，访问localhost:4000预览效果。4、hexo deploy，同步到git">
-<meta property="og:updated_time" content="2016-02-09T07:12:23.840Z">
+初次配置好Hexo后，之后写博客后常用的操作如下：1、hexo new “my new post” 建立新博客文档2、在PersonalPage\source_posts中打开文件进行编辑3、hexo server，访问localhost:4000预览效果。4、hexo clean5、hexo g">
+<meta property="og:updated_time" content="2016-06-21T09:15:50.442Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我的第一篇博客——Hexo和Markdown的使用方法">
 <meta name="twitter:description" content="我的个人主页采用了Hexo+Github进行搭建，Hexo依赖于Node.js，需要实现下载和安装。
-初次配置好Hexo后，之后写博客后常用的操作如下：1、hexo new “my new post” 建立新博客文档2、在PersonalPage\source_posts中打开文件进行编辑3、hexo server，访问localhost:4000预览效果。4、hexo deploy，同步到git">
+初次配置好Hexo后，之后写博客后常用的操作如下：1、hexo new “my new post” 建立新博客文档2、在PersonalPage\source_posts中打开文件进行编辑3、hexo server，访问localhost:4000预览效果。4、hexo clean5、hexo g">
   
   
   <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
@@ -88,13 +88,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>我的个人主页采用了Hexo+Github进行搭建，Hexo依赖于Node.js，需要实现下载和安装。</p>
-<p>初次配置好Hexo后，之后写博客后常用的操作如下：<br>1、hexo new “my new post” 建立新博客文档<br>2、在PersonalPage\source_posts中打开文件进行编辑<br>3、hexo server，访问localhost:4000预览效果。<br>4、hexo deploy，同步到github。即可更新到个人主页上。<br><a id="more"></a><br>在编写个人博客的内容时，采用了Markdown语法进行编写，主要的语法规则如下：<br>1、单个回车视为空格。<br>2、连续回车进行分段。<br>3、行尾加两个空格，即可完成段内分行。<br>4、在文字首尾加上一对单个字符，文字将被显示成斜体。<br>5、在文字首尾加上一对两重个字符，文字将被显示成斜体。<br>6、行的开头空4的空格，表示程序代码。<br>7、#到######为开头的文字分别为一到六级标题。<br>8、直接把一个URL显示为超级链接</p>
+<p>初次配置好Hexo后，之后写博客后常用的操作如下：<br>1、hexo new “my new post” 建立新博客文档<br>2、在PersonalPage\source_posts中打开文件进行编辑<br>3、hexo server，访问localhost:4000预览效果。<br>4、hexo clean<br>5、hexo g -d<br>6、hexo deploy，同步到github。即可更新到个人主页上。<br>另外，add page “page_name”加入新栏目</p>
+<a id="more"></a>
+<p>在编写个人博客的内容时，采用了Markdown语法进行编写，主要的语法规则如下：<br>1、单个回车视为空格。<br>2、连续回车进行分段。<br>3、行尾加两个空格，即可完成段内分行。<br>4、在文字首尾加上一对单个字符，文字将被显示成斜体。<br>5、在文字首尾加上一对两重个字符，文字将被显示成斜体。<br>6、行的开头空4的空格，表示程序代码。<br>7、#到######为开头的文字分别为一到六级标题。<br>8、直接把一个URL显示为超级链接</p>
 <p>参考链接：<br>1、<a href="http://zipperary.com/2013/05/29/hexo-guide-3/" target="_blank" rel="external">http://zipperary.com/2013/05/29/hexo-guide-3/</a><br>2、<a href="http://www.ituring.com.cn/article/23" target="_blank" rel="external">http://www.ituring.com.cn/article/23</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sunshineallway.github.io/2016/01/29/my-new-post/" data-id="cipp8h31w000a38u4a1iue8ap" class="article-share-link">Share</a>
+      <a data-url="http://sunshineallway.github.io/2016/01/29/my-new-post/" data-id="cipp8nk2s000axsu4v8mpzh5e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
