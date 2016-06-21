@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>基于数据流分析的字符串缺陷检测算法 | Zone of Sunshine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;为期一个学期的本科毕业设计结束了，一个学期以来，围绕着基于数据流分析的字符串缺陷检测，设计了一个检测算法。下面简单介绍一下检测算法的设计。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于数据流分析的字符串缺陷检测算法">
+<meta property="og:url" content="http://sunshineallway.github.io/2016/06/21/undergraduatethesis/index.html">
+<meta property="og:site_name" content="Zone of Sunshine">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;为期一个学期的本科毕业设计结束了，一个学期以来，围绕着基于数据流分析的字符串缺陷检测，设计了一个检测算法。下面简单介绍一下检测算法的设计。">
+<meta property="og:updated_time" content="2016-06-21T09:03:52.552Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于数据流分析的字符串缺陷检测算法">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;为期一个学期的本科毕业设计结束了，一个学期以来，围绕着基于数据流分析的字符串缺陷检测，设计了一个检测算法。下面简单介绍一下检测算法的设计。">
+  
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="overlay"></div>
+  <div id="header-outer" class="outer">
+    <div id="profile_img">
+      <img id="circle_img" src="https://ss3.baidu.com/7LsWdDW5_xN3otqbppnN2DJv/pass/;q=90;g=0/sign=20c25a524ba98226f48d232ebab9de3c/6609c93d70cf3bc7543b15cbd900baa1cd112ada.jpg" />
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Zone of Sunshine</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Walk steps step by step</a>
+        </h2>
+      
+    </div>
+    <div id="header-menu">
+      <nav id="main-nav">
+        <ul>
+        
+          <li><a href="/"><i class="fa fa-home icon-setting"></i></a></li>
+        
+          <li><a href="/archives"><i class="fa fa-archive icon-setting"></i></a></li>
+        
+          <li><a href="/2016/01/29/my-new-post-4/"><i class="fa fa-user icon-setting"></i></a></li>
+        
+        
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-undergraduatethesis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/21/undergraduatethesis/" class="article-date">
+  <time datetime="2016-06-21T07:59:14.000Z" itemprop="datePublished">6月 21 2016</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术博客/">技术博客</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基于数据流分析的字符串缺陷检测算法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为期一个学期的本科毕业设计结束了，一个学期以来，围绕着基于数据流分析的字符串缺陷检测，设计了一个检测算法。下面简单介绍一下检测算法的设计。<br><a id="more"></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在C语言中，字符串是有char型的数组表示的。一个合法的字符串中应当包括’\0’，这个特定的字符限定了字符串的终止位置。如果在程序的转移过程中，这个char型数组中缺少这个字符，在使用该数组作为字符串参数调用字符串库函数时，会导致程序的意外终止或者得到一个错误的结果，这给实际软件系统带来了很大的安全隐患。由于当前的实际项目中对字符串的使用极为普遍，因此对这一字符串缺陷进行检测具有很重要的意义和良好的应用前景。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2007年，Dirk Beyer提出了可配置的程序分析（Configurable Program Analysis）的概念，并于接下来的两年完善了这一理论，并开发了CPAchecker这一开源静态分析的框架。通过定义可配置的程序分析器（CPA），按照数据流转移的先后顺序遍历输入C语言程序中的所有语句，得到每条语句对应位置的状态，从而得到目标状态，即含有缺陷的状态。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在CPA中，包含以下四个组件：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）抽象域：CPA中是由状态和状态变迁组成的，状态中含有一些储存了程序的某些特殊属性，抽象域定义了CPA状态中的包含的记录程序属性的变量信息。在本次字符串缺陷检测过程中，抽象域包含了指针分析映射（将指针名称映射到指向的本体）、结构体的属性信息（包括非结构体类型的属性）、函数的返回值信息。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）变迁关系：变迁关系的定义是CPA定义的重点。需要针对CPAchecker中把C语言语句分成的九种类型分别定义每种类型下的CPA状态的转移。这里有设计到过程间分析、指针分析、还有字符串函数的语义建模。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（3）merge操作符：在CPA的状态转移时，可能会有多个状态转移到同一个位置，这就需要对多个状态进行merge操作。通常merge操作由两个类型：join类型和sep类型。sep类型下第二个状态完全覆盖第一个状态，即为merge后的结果。join类型下需要将待合并的两个状态做偏序集中的交汇运算，将交汇运算的结果作为merge的结果。经过充分考虑，决定在分析中采用sep模式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（4）stop操作符：stop(e,R)是判断状态e是否被状态集合R所覆盖。根据merge选取的模式定义stop操作符的模式。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上四个操作符在CPAchecker的核心算法的CPA算法中都扮演者重要的角色。在使用CPAchecker进行程序分析时，需要完整地定义以上四个组件。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;介绍完CPA的四个组件，下面介绍一下我工作的一些重难点。首先是包括结构体在内的类型的跟踪：由于要分析所有的字符串即char型数组，因此需要不仅要跟踪所有char型数组，还需要跟踪包含char型数组的结构体，对于结构体的跟踪，采用的是递归跟踪的方法，递归地对结构体的成员类型进行解析，若遇到char型数组则记录下其’\0’位置以及数组长度等信息。其次是指针分析，我采用的是指针指向图分析的方式，将指针与其指向的本体进行关联，构造一个无环有向图。另外，过程见分析中通过模拟栈空间的变换并跟踪return语句后的变量结构得以实现。最后也是很重要的一个问题————字符串函数的语义建模：对于某些函数，比如strcpy会对函数参数进行修改，而对于strlen这样的函数，需要有返回值。因此我将常用的18个字符串函数进行语义建模，在系统分析时真实地反映字符串库函数的行为特性。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过充分的测试，系统能处理常用的C语言结构，包括结构体、高级指针、指针与结构体成员的嵌套访问、各种类型的而函数调用与返回等等。但是由于分析工具的限制，仍然具有如下不足：首先对于高维数组只能视为一个整体进行处理，由此带来一定程度的漏报和误报。其次，在if、while、for等条件判断中，只能对整型和布尔型进行判断，对于char型数组中元素的逻辑表达式无法判断真假，由此在sep模式下带来路径展开，从而导致状态空间爆炸。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;项目的git链接：<a href="https://github.com/SunshineAllWay/TsmartCodeStandrad" target="_blank" rel="external">https://github.com/SunshineAllWay/TsmartCodeStandrad</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当初本来是想做代码规范检查的，所以仓库的名称现在看起来很奇怪，而且standard还拼错了，不过不要在意这些细节。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大部分都是CPAchecker的框架代码，本次字符串缺陷检测的核心代码在cn.edu.thu.tsmart.tool.cc/src/中的cpa目录下的string包中。</p>
+<p>参考文献：<br>1、Configurable Software Verification: Concretizing the Covergence of Model Checking and Program Analysis Site：<a href="http://link.springer.com/chapter/10.1007%2F978-3-540-73368-3_51" target="_blank" rel="external">http://link.springer.com/chapter/10.1007%2F978-3-540-73368-3_51</a><br>2、Program Analysis with Dynamic Precision Adjustment Site:<a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=4639306&amp;tag=1" target="_blank" rel="external">http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=4639306&amp;tag=1</a><br>3、CPAchecker: A Tool for Configurable Software Verification arXiv:0902.0019</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sunshineallway.github.io/2016/06/21/undergraduatethesis/" data-id="cipp8h2zq000038u4xbm22y87" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序分析/">程序分析</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/02/09/my-new-post-3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Shape Analysis</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Chengpeng Wang<br>
+      <a href="https://github.com/ken8203/hexo-theme-alberta" target="_blank">Alberta</a> by <a href="http://jaychung.tw" target="_blank">jaychung</a>. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Thank <a href="http://subtlepatterns.com/" target="_blank">Subtlepatterns</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//imsky.github.io/holder/holder.js"></script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
