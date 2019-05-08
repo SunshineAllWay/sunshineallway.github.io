@@ -1,163 +1,359 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en"> 
 <head>
-<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
-<title>Letter</title><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; }
-html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
-body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
-iframe { margin: auto; }
-a.url { word-break: break-all; }
-a:active, a:hover { outline: 0px; }
-.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
-#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 40px; }
-#write.first-line-indent p { text-indent: 2em; }
-#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
-#write.first-line-indent li { margin-left: 2em; }
-.for-image #write { padding-left: 8px; padding-right: 8px; }
-body.typora-export { padding-left: 30px; padding-right: 30px; }
-.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
-@media screen and (max-width: 500px) {
-  body.typora-export { padding-left: 0px; padding-right: 0px; }
-  #write { padding-left: 20px; padding-right: 20px; }
-  .CodeMirror-sizer { margin-left: 0px !important; }
-  .CodeMirror-gutters { display: none !important; }
-}
-#write li > figure:first-child { margin-top: -20px; }
-#write ol, #write ul { position: relative; }
-img { max-width: 100%; vertical-align: middle; }
-button, input, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
-input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
-*, ::after, ::before { box-sizing: border-box; }
-#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
-#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
-h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 2; }
-p { orphans: 4; }
-h1 { font-size: 2rem; }
-h2 { font-size: 1.8rem; }
-h3 { font-size: 1.6rem; }
-h4 { font-size: 1.4rem; }
-h5 { font-size: 1.2rem; }
-h6 { font-size: 1rem; }
-.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
-.hidden { display: none; }
-.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
-a { cursor: pointer; }
-sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
-sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
-#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
-figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
-figure > table { margin: 0px !important; }
-tr { break-inside: avoid; break-after: auto; }
-thead { display: table-header-group; }
-table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
-table.md-table td { min-width: 32px; }
-.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
-.CodeMirror-linenumber { user-select: none; }
-.CodeMirror { text-align: left; }
-.CodeMirror-placeholder { opacity: 0.3; }
-.CodeMirror pre { padding: 0px 4px; }
-.CodeMirror-lines { padding: 0px; }
-div.hr:focus { cursor: none; }
-#write pre { white-space: pre-wrap; }
-#write.fences-no-line-wrapping pre { white-space: pre; }
-#write pre.ty-contain-cm { white-space: normal; }
-.CodeMirror-gutters { margin-right: 4px; }
-.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
-.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
-#write .md-fences.mock-cm { white-space: pre-wrap; }
-.md-fences.md-fences-with-lineno { padding-left: 0px; }
-#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
-.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
-.CodeMirror-line, twitterwidget { break-inside: avoid; }
-.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
-.footnotes + .footnotes { margin-top: 0px; }
-.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
-li div { padding-top: 0px; }
-blockquote { margin: 1rem 0px; }
-li .mathjax-block, li p { margin: 0.5rem 0px; }
-li { margin: 0px; position: relative; }
-blockquote > :last-child { margin-bottom: 0px; }
-blockquote > :first-child, li > :first-child { margin-top: 0px; }
-.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
-#write .footnote-line { white-space: pre-wrap; }
-@media print {
-  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; }
-  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
-  .typora-export * { -webkit-print-color-adjust: exact; }
-  html.blink-to-pdf { font-size: 13px; }
-  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid; }
-  .typora-export #write::after { height: 0px; }
-  @page { margin: 20mm 0px; }
-}
-.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
-a img, img a { cursor: pointer; }
-pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
-p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
-p > .md-image:only-child { display: inline-block; width: 100%; }
-#write .MathJax_Display { margin: 0.8em 0px 0px; }
-.md-math-block { width: 100%; }
-.md-math-block:not(:empty)::after { display: none; }
-[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
-.md-task-list-item { position: relative; list-style-type: none; }
-.task-list-item.md-task-list-item { padding-left: 0px; }
-.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
-.math { font-size: 1rem; }
-.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
-.md-toc-content { position: relative; margin-left: 0px; }
-.md-toc-content::after, .md-toc::after { display: none; }
-.md-toc-item { display: block; color: rgb(65, 131, 196); }
-.md-toc-item a { text-decoration: none; }
-.md-toc-inner:hover { text-decoration: underline; }
-.md-toc-inner { display: inline-block; cursor: pointer; }
-.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
-.md-toc-h2 .md-toc-inner { margin-left: 2em; }
-.md-toc-h3 .md-toc-inner { margin-left: 4em; }
-.md-toc-h4 .md-toc-inner { margin-left: 6em; }
-.md-toc-h5 .md-toc-inner { margin-left: 8em; }
-.md-toc-h6 .md-toc-inner { margin-left: 10em; }
-@media screen and (max-width: 48em) {
-  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
-  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
-  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
-  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
-}
-a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
-.footnote-line a:not(.reversefootnote) { color: inherit; }
-.md-attr { display: none; }
-.md-fn-count::after { content: "."; }
-code, pre, samp, tt { font-family: var(--monospace); }
-kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
-.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
-code { text-align: left; vertical-align: initial; }
-a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
-.md-inline-math .MathJax_SVG .noError { display: none !important; }
-.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
-.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
-.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
-.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
-.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
-.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
-.MathJax_SVG * { transition: none; }
-.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; }
-.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
-.md-diagram-panel > svg { max-width: 100%; }
-[lang="mermaid"] svg, [lang="flow"] svg { max-width: 100%; }
-[lang="mermaid"] .node text { font-size: 1rem; }
-table tr th { border-bottom: 0px; }
-video { max-width: 100%; display: block; margin: 0px auto; }
-iframe { max-width: 100%; width: 100%; border: none; }
-.highlight td, .highlight tr { border: 0px; }
+    <title>Stephen Wang</title>
+    
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Responsive Resume Template">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="favicon.ico"> 
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    
+    <!-- FontAwesome JS-->
+    <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js" integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a" crossorigin="anonymous"></script>
+       
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="assets/css/pillar-1.css">
 
 
+</head> 
 
+<body>	
 
+    <article class="resume-wrapper text-center position-relative">
+	    <div class="resume-wrapper-inner mx-auto text-left bg-white shadow-lg">
+		    <header class="resume-header pt-4 pt-md-0">
+			    <div class="media flex-column flex-md-row">
+				    <img class="mr-3 img-fluid picture mx-auto" src="assets/images/profile.jpg" alt="">
+				    <div class="media-body p-4 d-flex flex-column flex-md-row mx-auto mx-lg-0">
+					    <div class="primary-info">
+						    <h1 class="name mt-0 mb-1 text-white text-uppercase text-uppercase">Stephen Wang</h1>
+						    <div class="title mb-3">PhD Candidate</div>
+						    <ul class="list-unstyled">
+							    <li class="mb-2"><a href="#"><i class="far fa-envelope fa-fw mr-2" data-fa-transform="grow-3"></i>stephenw.wangcp@gmail.com</a></li>
+						    </ul>
+					    </div><!--//primary-info-->
+					    <div class="secondary-info ml-md-auto mt-2">
+						    <ul class="resume-social list-unstyled">
+						    <li class="mb-3"><a href="www.github.com/SunshineAllWay"><span class="fa-container text-center mr-2"><i class="fab fa-github-alt fa-fw"></i></span>Stephen's Github</a></li>
+				             <li class="mb-3"><a href="https://www.linkedin.com/in/%E7%A8%8B%E9%B9%8F-%E7%8E%8B-35a554126/"><span class="fa-container text-center mr-2"><i class="fab fa-linkedin-in fa-fw"></i></span>Stephen's Linkedin</a></li>
+						    </ul>
+					    </div><!--//secondary-info-->
+					    
+				    </div><!--//media-body-->
+			    </div><!--//media-->
+		    </header>
+		    <div class="resume-body p-5">
+			    <section class="resume-section summary-section mb-5">
+				    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Career Profile</h2>
+				    <div class="resume-section-content">
+					    <p class="mb-0">Stephen Wang is currently a Ph.D candidate under the supervision of Charles Zhang and received his master degree at Tsinghua University. Before this, he received his B.S in Software Engineering and Mathematics(double major) at Tsinghua University.</p>
 
+					    <p>His main area of research is programming languages, static analysis and code completion. He is current research mainly focus on build system maintenance and shape analysis. </p>
+				    </div>
+			    </section><!--//summary-section-->
+			    <div class="row">
+				    <div class="col-lg-9">
+					    <section class="resume-section experience-section mb-5">
+						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Research Experience</h2>
+						    <div class="resume-section-content">
+							    <div class="resume-timeline position-relative">
+							    <article class="resume-timeline-item position-relative pb-2">
+									    
+									  <div class="resume-timeline-item-header mb-2">
+										    <div class="d-flex flex-column flex-md-row">
+										        <h3 class="resume-position-title font-weight-bold mb-1">Inconsistency Detection in Build Systems</h3>
+										        <div class="resume-company-name ml-auto">Supervised by Charles Zhang, HKUST</div>
+										    </div><!--//row-->
+										    <div class="resume-position-time">Jan 2019 - now</div>
+									    </div><!--//resume-timeline-item-header-->
+									    <div class="resume-timeline-item-desc">
+										    <p>presented a novel approach to detect the inconsistencies in build systems which may cause errors in the actual build. </p>
+									    </div>
+								    </article><!--//resume-timeline-item-->
 
+								    <article class="resume-timeline-item position-relative pb-2">
+									    
+									    <div class="resume-timeline-item-header mb-2">
+										    <div class="d-flex flex-column flex-md-row">
+										        <h3 class="resume-position-title font-weight-bold mb-1">Code Completion</h3>
+										        <div class="resume-company-name ml-auto">Supervised by Yu Jiang, Tsinghua University</div>
+										    </div><!--//row-->
+										    <div class="resume-position-time">May 2018 - Dec 2018</div>
+									    </div><!--//resume-timeline-item-header-->
+									    <div class="resume-timeline-item-desc">
+										    <p>Applied methods from natural language processing to programming languages and obtained a good performance.</p>
+									    </div>
+								    </article><!--//resume-timeline-item-->
+								    
+								    <article class="resume-timeline-item position-relative pb-2">
+									    
+									    <div class="resume-timeline-item-header mb-2">
+										    <div class="d-flex flex-column flex-md-row">
+										        <h3 class="resume-position-title font-weight-bold mb-1">Loop Invariant</h3>
+										        <div class="resume-company-name ml-auto">Supervised by Min Zhou, Tsinghua University</div>
+										    </div><!--//row-->
+										    <div class="resume-position-time">Sep 2016 - Jan 2017</div>
+									    </div><!--//resume-timeline-item-header-->
+									    <div class="resume-timeline-item-desc">
+										    <p>Implemented the loop invariant algorithm on model checking framework CPAchecker. Applied it to the generation of function summary and used it in real world projects.</p>
+									    </div><!--//resume-timeline-item-desc-->
+								    </article><!--//resume-timeline-item-->
+								    
+								    <article class="resume-timeline-item position-relative pb-2">
+									    
+									    <div class="resume-timeline-item-header mb-2">
+										    <div class="d-flex flex-column flex-md-row">
+										        <h3 class="resume-position-title font-weight-bold mb-1">Thesis: Detection of String Fault based on Data Flow Analysis</h3>
+										        <div class="resume-company-name ml-auto">Supervised by Min Zhou, Tsinghua University</div>
+										    </div><!--//row-->
+										    <div class="resume-position-time">Jan 2016 - Jun 2016</div>
+									    </div><!--//resume-timeline-item-header-->
+									    <div class="resume-timeline-item-desc">
+										    <p>Implemented a module to detect the string fault which may cause program crash when calling string lib functions. Based on the model check framework CPAchecker.</p>
+									    </div><!--//resume-timeline-item-desc-->
+								   </article><!--//resume-timeline-item-->
 
- .typora-export li, .typora-export p, .typora-export,  .footnote-line {white-space: normal;} 
-</style>
-</head>
-<body class='typora-export os-windows' >
-<div  id='write'  class = 'is-node'><h1><a name='header-n69' class='md-header-anchor '></a>写给你</h1><p>2019年4月16日，距离2019年5月20日还有34天，当做出决定的这一刻起，我觉得毕业前似乎又多了一件需要用心经营的事情，不论结果如何。今天帮你写完了毕设实验的代码的大体框架，我的毕业清单上又可以心满意足地加个对勾，尽管我在清单的末尾又加上了新的一项，这一项又一次与你有关。</p><p>我也不清楚是是从何时起，开始习惯和你在微信上你一言我一语地聊天，似乎是大四要毕业的时候吧，当时正值欧洲杯酣战，伪球迷的我在你的感召下看起了球。似乎和你之前长篇的记忆就是从那个时候开始的，尽管我们在09年就已经认识了，距离今天已经有了3514天。</p><p>高中的时候曾经有段时间我坐在你的前面和后面，你和cxy，我和wyc，有时候会扯扯淡，我和后面的wff还会八卦wyc和cxy。还记得有一次拿你的笔恶作剧，结果你哭了，当时我真的慌得不行。这些糗事或许你已经不记得了。确实，充满压力的高中生活都被竞赛和高考填满，而我们还不幸地不在一个竞赛组。不过谁也没想到，你后来居然学了数学，我竟然也会找你借《代数学基础》。</p><p>正如你所知，我的大学四年过得并不顺利，研究生期间更是如此。家人没有寄予我太多期待，只希望我能健康快乐的生活，因此我一直希望自己能够选择一个自由的生活，从事自己热爱的事业，钻研自己感兴趣的学术。一直以来，我觉得我没有什么牵挂或者说是羁绊，直到有一次开始为未来感到些许隐忧。本科毕业后，在那个火热的暑假的狂欢后，你去了香港，我回到了北京。我们之间常常微信联系，甚至有段时间是每天都在了解对方新的生活状态：晒美食、晒宿舍……或许你仅仅是无意，把我当成一个普通的好朋友。</p><p>之后在我生病的那段时间里，我几乎丧失了所有的生活能力，不能走路，不能使用电脑，手机打字几乎是龟速，吃饭的时候只能蜷缩在角落里缓慢地进食。内心的恐惧让当时的我真的不堪一击，尽管我知道我要坚强。你在微信上鼓励我，虽然只是只言片语。回到学校后，那天听到你要给我寄明信片，当时觉得有些不太相信，还跟你来了个图灵测试，哈哈。你知道吗，后来我就把你的明信片放在我当时最常用的书里夹着，有时候累了坚持不下去了，就拿出来看看你说的话，还有上面美丽的厦门海景。</p><p><img src='img\1.jpg'/></p><p>休学在家的半年里，在经历了自己身心上的病痛和至亲离去后，我清醒地明白有些事情可遇不可求，我开始尝试将你当做一个无话不谈的朋友。在我没有变得足够强大之前，我不能对未来有太多的期待。到了去年7月，我决定出国继续读博的时候，我觉得我似乎可能与你更近一些，我有了一些试一试的想法。在最后的选择时，面对列表中NTU和HKUST两个选项，我犹豫了很久，但最终选择了HKUST。我自己也不知道其中你占了多少的重量。之后去香港面试，10月28日，我第一次约你出来逛街吃饭。在旺角的地铁口，我等待你的出现，那十几分钟真是漫长。5天后，我的24岁生日那天，你和我一起坐上了前往北京的火车，开始了你的第一次北京之旅。现在想想，那时的北京天真蓝，白塔寺前的风景真是美，就连北大的食堂都比原来好吃。</p><p>好吧，这些都是写流水账，我写流水账的技术很蹩脚，但是请相信我真的是用心写的。包括之前打算一个月给你写一张明信片，也是在想给你写一些有意思有意义的事情，尽管后来你想一次性拿到。这段时间刚从深圳回来，还不是很适应北京的气候。每天晚上一个人坐在实验室的电脑前，窗台吹进阵阵晚风，在Mathematica里写这一个个函数，调试、运行、验证。原本对Mathematica一窍不通的我竟然也做到了一周速成。每天深夜回寝室的路上空无一人，但是自己却不觉得辛苦和疲倦，这样的付出让我慢慢地变得强大。</p><p>我并不是一个完美的人，我也不想成为一个完美的人，因为我希望有个能弥补我缺点甚至缺陷一同成长的人，可以相互陪伴，3年或者10年，10年或者20年，甚至一辈子。我不知道自己是否一直都是一厢情愿，如果可能，我愿意与你相互付出。不论你做出怎样的选择，我都愿意像《致橡树》里那样：“我都是你近旁的一棵木棉，作为树的形象和你站在一起。“ 哪怕我们不能成为恋人，我还是想和你做一辈子的好朋友，能在对方遇到低谷时不遗余力地帮助他，鼓励他，就像我生病时你对我一样。就像《七夜雪》中的霍展白，在奔走江湖的劳顿之际，能回到四季如春的药师谷，因为总有一个人在树下取出温好的美酒。</p><p><img src='img\2.jpg'/></p><p>致默默喜欢三年的你。</p></div>
+								   <article class="resume-timeline-item position-relative pb-2">
+									    
+									    <div class="resume-timeline-item-header mb-2">
+										    <div class="d-flex flex-column flex-md-row">
+										        <h3 class="resume-position-title font-weight-bold mb-1">Thesis: Factorialization of Cluster Algebras</h3>
+										        <div class="resume-company-name ml-auto">Supervised by Bin Zhu, Tsinghua University</div>
+										    </div><!--//row-->
+										    <div class="resume-position-time">Jan 2016 - Jun 2016</div>
+									    </div><!--//resume-timeline-item-header-->
+									    <div class="resume-timeline-item-desc">
+										    <p>Summarized the main work on the factoriality of cluster algebras contributed by Philipp Lampe, Ghristof Geiss and Bernard Lecterc. Dealed with the cluster algebra of Euclidean type and discussed the factoriality of Euclidean type.</p>
+									    </div><!--//resume-timeline-item-desc-->
+								   </article><!--//resume-timeline-item-->
+							    </div><!--//resume-timeline-->
+			
+						    </div>
+					    </section><!--//experience-section-->
+
+					    <section class="resume-section experience-section mb-5">
+						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Teaching Experience</h2>
+						    <div class="resume-section-content">
+							   
+							
+								    <article class="resume-timeline-item position-relative pb-2">
+									    
+									    <div class="resume-timeline-item-header mb-2">
+										    <div class="d-flex flex-column flex-md-row">
+										        <h3 class="resume-position-title font-weight-bold mb-1">Haskell: Functional Language Programming</h3>
+										        <div class="resume-company-name ml-auto">Tsinghua University</div>
+										    </div><!--//row-->
+										    <div class="resume-position-time">Spring 2018, Spring 2019</div>
+									    </div><!--//resume-timeline-item-header-->
+									    <div class="resume-timeline-item-desc">
+										    <p>Grading homework and tests. Hosting TA sessions to answer questions and provide homework solutions.</p>
+									    </div><!--//resume-timeline-item-desc-->
+								    </article><!--//resume-timeline-item-->
+								    
+								    <article class="resume-timeline-item position-relative pb-2">
+									    
+									    <div class="resume-timeline-item-header mb-2">
+										    <div class="d-flex flex-column flex-md-row">
+										        <h3 class="resume-position-title font-weight-bold mb-1">Automaton and Formal Logic</h3>
+										        <div class="resume-company-name ml-auto">Tsinghua University</div>
+										    </div><!--//row-->
+										    <div class="resume-position-time">Fall 2019</div>
+									    </div><!--//resume-timeline-item-header-->
+									    <div class="resume-timeline-item-desc">
+										    <p>Hosting TA sessions to answer questions and provide homework solutions.</p>
+									    </div><!--//resume-timeline-item-desc-->
+								   </article><!--//resume-timeline-item-->
+
+								       <article class="resume-timeline-item position-relative pb-2">
+									    
+									    <div class="resume-timeline-item-header mb-2">
+										    <div class="d-flex flex-column flex-md-row">
+										        <h3 class="resume-position-title font-weight-bold mb-1">Introduction to Complex Function</h3>
+										        <div class="resume-company-name ml-auto">Tsinghua University</div>
+										    </div><!--//row-->
+										    <div class="resume-position-time">Fall 2016</div>
+									    </div><!--//resume-timeline-item-header-->
+									    <div class="resume-timeline-item-desc">
+										    <p>Grading homework and tests</p>
+									    </div>
+								    </article><!--//resume-timeline-item-->
+				
+			
+						    </div>
+					    </section><!--//experience-section-->
+
+				    <section class="resume-section skills-section mb-3">
+						    <h4 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Publications</h4>
+						    <div class="resume-section-content">
+						        <div class="resume-skill-item">
+							
+							        <ul class="list-unstyled mb-4">
+								        <li class="mb-2">
+								      
+										    <p><b>Chengpeng Wang</b>, Yixiao Yang, Han Liu, Le Kang. Statistical API Completion Based on Code Relevance Mining. In <b>MAINT 2019</b>: International Workshop on Mining and Analyzing Interaction Histories, Feb, 2019.</p>
+									
+								        </li>
+								     
+							        </ul>
+						       </div><!--//resume-skill-item-->
+						    </section>
+
+					 <section class="resume-section skills-section mb-3">
+						    <h4 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Misc</h4>
+						    <div class="resume-section-content">
+						        <div class="resume-skill-item">
+							
+							        <ul class="list-unstyled mb-4">
+								        <li class="mb-2">
+								      
+										    <li class="mb-2">
+								            <p> Paper Reading </p>
+									        
+								        	</li>
+									
+								        </li>
+								     
+							        </ul>
+						       </div><!--//resume-skill-item-->
+						    </section>
+
+					</div>
+				    <div class="col-lg-3">
+				    <section class="resume-section skills-section mb-3">
+						    <h4 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Research Interest</h4>
+						    <div class="resume-section-content">
+						        <div class="resume-skill-item">
+							
+							        <ul class="list-unstyled mb-4">
+								        <li class="mb-2">
+								            <div class="resume-skill-name">Build System Maintenance</div>
+									        
+								        </li>
+								        <li class="mb-2">
+								            <div class="resume-skill-name">Static Analysis</div>
+									        
+								        </li>
+								        <li class="mb-2">
+								            <div class="resume-skill-name">Code Completion</div>
+									     
+								        </li>
+							        </ul>
+						        </div><!--//resume-skill-item-->
+						 </section>
+					    <section class="resume-section skills-section mb-5">
+						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Skills &amp; Tools</h2>
+						    <div class="resume-section-content">
+						        <div class="resume-skill-item">
+							        <h4 class="resume-skills-cat font-weight-bold">Skills</h4>
+							        <ul class="list-unstyled mb-4">
+								        <li class="mb-2">
+								            <div class="resume-skill-name">Program Analysis</div>
+									        
+								        </li>
+								        <li class="mb-2">
+								            <div class="resume-skill-name">Numerical Computation</div>
+									        
+								        </li>
+								        <li class="mb-2">
+								            <div class="resume-skill-name">Modern Algebra</div>
+								        </li>
+							        </ul>
+						        </div><!--//resume-skill-item-->
+						        
+						        <div class="resume-skill-item">
+						            <h4 class="resume-skills-cat font-weight-bold">Tools</h4>
+						            <ul class="list-inline">
+							            <li class="list-inline-item"><span class="badge badge-light">Python</span></li>
+							            <li class="list-inline-item"><span class="badge badge-light">Java</span></li>
+							            <li class="list-inline-item"><span class="badge badge-light">Mathematica</span></li>
+							            <li class="list-inline-item"><span class="badge badge-light">Matlab</span></li>
+							            <li class="list-inline-item"><span class="badge badge-light">LaTex</span></li>
+							            <li class="list-inline-item"><span class="badge badge-light">Git</span></li>
+						            </ul>
+						        </div><!--//resume-skill-item-->
+						    </div><!--resume-section-content-->
+					    </section><!--//skills-section-->
+					    <section class="resume-section education-section mb-5">
+						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Education</h2>
+						    <div class="resume-section-content">
+							    <ul class="list-unstyled">
+								    <li class="mb-2">
+								        <div class="resume-degree font-weight-bold">MSc in Software Engineering</div>
+								        <div class="resume-degree-org">School of Software, Tsinghua University</div>
+								        <div class="resume-degree-time">2016 - 2019</div>
+								    </li>
+								    <li>
+								        <div class="resume-degree font-weight-bold">BSc in Mathematics</div>
+								        <div class="resume-degree-org">Department of Mathematics, Tsinghua University</div>
+								        <div class="resume-degree-time">2013 - 2016</div>
+								    </li>
+								    <li>
+								        <div class="resume-degree font-weight-bold">BSc in Software Engineering</div>
+								        <div class="resume-degree-org">School of Software, Tsinghua University</div>
+								        <div class="resume-degree-time">2012 - 2016</div>
+								    </li>
+							    </ul>
+						    </div>
+					    </section><!--//education-section-->
+					    <section class="resume-section reference-section mb-5">
+						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Awards</h2>
+						    <div class="resume-section-content">
+							    <ul class="list-unstyled resume-awards-list">
+								    <li class="mb-2 pl-4 position-relative">
+								        <i class="resume-award-icon fas fa-trophy position-absolute" data-fa-transform="shrink-2"></i>
+								        <div class="resume-award-name">Future Academician Scholarship</div>
+								        <div class="resume-award-desc">honored 100 students at Tsinghua</div>
+								    </li>
+								    <li class="mb-0 pl-4 position-relative">
+								        <i class="resume-award-icon fas fa-trophy position-absolute" data-fa-transform="shrink-2"></i>
+								        <div class="resume-award-name">Scholarship for Academic Excellence</div>
+								        <div class="resume-award-desc">honered for excellent academic performance</div>
+								    </li>
+							    </ul>
+						    </div>
+					    </section><!--//interests-section-->
+					    <section class="resume-section language-section mb-5">
+						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Language</h2>
+						    <div class="resume-section-content">
+							    <ul class="list-unstyled resume-lang-list">
+								    <li class="mb-2"><span class="resume-lang-name font-weight-bold">Chinese</span> <small class="text-muted font-weight-normal">(Native)</small></li>
+								    <li class="mb-2 align-middle"><span class="resume-lang-name font-weight-bold">English</span> <small class="text-muted font-weight-normal">(Professional)</small></li>
+							    </ul>
+						    </div>
+					    </section><!--//language-section-->
+					    <section class="resume-section interests-section mb-5">
+						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Interests</h2>
+						    <div class="resume-skill-item">
+						            <ul class="list-inline">
+						            	<li class="list-inline-item"><span class="badge badge-light">Reading novels</span></li>
+							            <li class="list-inline-item"><span class="badge badge-light">Writing essays</span></li>
+							            <li class="list-inline-item"><span class="badge badge-light">Running</span></li>
+							            <li class="list-inline-item"><span class="badge badge-light">Table tennis</span></li>
+						            </ul>
+						    </div><!--//resume-skill-item-->
+					    </section><!--//interests-section-->
+				    </div>
+			    
+		    </div><!--//resume-body-->
+		    
+		    
+	    </div>
+    </article>  
+
+    
+    <footer class="footer text-center pt-2 pb-5">
+	     <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can buy the commercial license via our website: themes.3rdwavemedia.com */-->
+                <small class="copyright">Designed with <i class="fas fa-heart"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+    </footer>
+
+    
+
 </body>
-</html>
+</html> 
+
